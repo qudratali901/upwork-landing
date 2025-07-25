@@ -81,10 +81,17 @@ footer {
 .video-section {
   text-align: center;
   padding: 2rem 0;
+  width: 100%;
+}
+
+.video-section > * {
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .video-section .instagram-media {
+  display: inline-block !important;
   margin-left: auto !important;
   margin-right: auto !important;
-  display: block !important;
+  max-width: 100% !important;
 }
