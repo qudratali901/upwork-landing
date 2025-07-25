@@ -78,3 +78,13 @@ footer {
   text-align: center;
   padding: 1rem 0;
 }
+.video-section {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.video-section .instagram-media {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
