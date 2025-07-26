@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Module 1: Mastering Upwork Basics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .module-nav {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .module-nav a {
+      color: #0984e3;
+      text-decoration: none;
+      margin: 0 0.8rem;
+      font-weight: bold;
+      transition: color 0.2s;
+    }
+    .module-nav a:hover {
+      color: #00b894;
+    }
+    .module-main {
+      max-width: 750px;
+      margin: 2rem auto;
+      padding: 2rem 1rem;
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    .progress-btn {
+      background: #00b894;
+      color: #fff;
+      border: none;
+      padding: 0.7em 2em;
+      border-radius: 100px;
+      font-size: 1em;
+      margin-top: 2rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .progress-btn.done {
+      background: #0984e3;
+    }
+    .progress-status {
+      margin-top: 1.2rem;
+      font-weight: bold;
+      color: #00b894;
+      font-size: 1.07em;
+    }
+  </style>
+</head>
+<body>
+<!-- Password Protection JS -->
+<script>
+  // CHANGE THIS PASSWORD for your real course!
+  const myPass = "mySecret2024";
+  if (sessionStorage.getItem("coursePass") !== myPass) {
+    let pass = prompt("Enter the course password:");
+    if (pass !== myPass) {
+      alert("Wrong password. Please contact the course admin for access.");
+      window.location.href = "index.html";
+    } else {
+      sessionStorage.setItem("coursePass", myPass);
+    }
+  }
+</script>
+<!-- Navigation Bar -->
+<nav class="module-nav">
+  <a href="module-intro.html">Intro</a> |
+  <a href="module1-upwork-basics.html">Upwork Basics</a> |
+  <a href="module2-portfolio.html">Portfolio</a> |
+  <a href="module3-jotform-expert.html">Jotform Expert</a> |
+  <a href="module4-jotform-upwork.html">Upwork+Jotform</a> |
+  <a href="conclusion.html">Conclusion</a>
+</nav>
+
+<main class="module-main">
+  <h1>Module 1: Mastering Upwork Basics</h1>
+  <p>Learn to build a powerful Upwork profile, write winning proposals, communicate like a pro, and set smart prices for your freelancing career.</p>
+  
+  <h2>Lesson Videos</h2>
+  <h3>Creating a Powerful Upwork Profile</h3>
+  <iframe width="315" height="560" src="YOUR_VIDEO_LINK_1" frameborder="0" allowfullscreen></iframe>
+  <h3>How Upwork’s Algorithm Works (Badge System, JSS)</h3>
+  <iframe width="315" height="560" src="YOUR_VIDEO_LINK_2" frameborder="0" allowfullscreen></iframe>
+  <!-- Add more videos as needed -->
+
+  <h2>Downloadable Resources</h2>
+  <ul style="text-align:left;max-width:400px;margin:1.5rem auto 2rem auto;">
+    <li><a href="assets/profile-template.pdf" download>Upwork Profile Template (PDF)</a></li>
+    <li><a href="assets/winning-proposal-examples.pdf" download>Winning Proposal Examples (PDF)</a></li>
+    <!-- Add more files as needed -->
+  </ul>
+
+  <!-- Progress Tracking Button -->
+  <button id="doneBtn" class="progress-btn">Mark this module as Done</button>
+  <div id="status" class="progress-status"></div>
+
+  <a href="module2-portfolio.html" class="cta-button" style="margin-top:2.5rem;">Next: Building a Stand-Out Portfolio →</a>
+</main>
+
+<script>
+  // PROGRESS TRACKING (per user/browser)
+  const moduleKey = "done-module1";
+  const btn = document.getElementById('doneBtn');
+  const statusDiv = document.getElementById('status');
+  if (localStorage.getItem(moduleKey) === "done") {
+    btn.classList.add("done");
+    btn.textContent = "✓ Module Completed";
+    statusDiv.textContent = "You have completed this module.";
+  }
+  btn.onclick = function() {
+    localStorage.setItem(moduleKey, "done");
+    btn.classList.add("done");
+    btn.textContent = "✓ Module Completed";
+    statusDiv.textContent = "You have completed this module.";
+  }
+</script>
+</body>
+</html>
