@@ -136,3 +136,38 @@ footer {
     max-width: 340px;
   }
 }
+.video-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 1.5rem auto;
+  background: #eafaf1;
+  border-radius: 16px;
+  aspect-ratio: 16 / 9; /* Modern browsers: perfect 16:9 responsive box */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.responsive-video {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  display: none; /* Hide unless src is set */
+}
+
+.video-wrap .no-video-text {
+  color: #777;
+  font-size: 1.1em;
+  text-align: center;
+  z-index: 1;
+}
+
+.video-wrap.has-video .responsive-video {
+  display: block;
+}
+.video-wrap.has-video .no-video-text {
+  display: none;
+}
