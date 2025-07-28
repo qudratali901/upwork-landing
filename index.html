@@ -87,10 +87,10 @@
         <img src="assets/Talha-Umar-screenshot-2.jpg" class="testimonial-img t1" alt="Screenshot 2">
         <img src="assets/Talha-Umar-screenshot-3.jpg" class="testimonial-img t1" alt="Screenshot 3">
       </div>
-      <div class="carousel-controls" style="margin-top:0.6rem;">
-        <span class="dot t1" onclick="slideTestimonial(1,0)"></span>
-        <span class="dot t1" onclick="slideTestimonial(1,1)"></span>
-        <span class="dot t1" onclick="slideTestimonial(1,2)"></span>
+      <div class="carousel-controls t1-controls" style="margin-top:0.6rem;">
+        <span class="dot t1" data-idx="0" onclick="slideTestimonial(1,0)"></span>
+        <span class="dot t1" data-idx="1" onclick="slideTestimonial(1,1)"></span>
+        <span class="dot t1" data-idx="2" onclick="slideTestimonial(1,2)"></span>
       </div>
     </div>
   </div>
@@ -105,21 +105,21 @@
         <img src="assets/Talha-Umar-screenshot-2.jpg" class="testimonial-img t2" alt="Screenshot 2">
         <img src="assets/Talha-Umar-screenshot-3.jpg" class="testimonial-img t2" alt="Screenshot 3">
       </div>
-      <div class="carousel-controls" style="margin-top:0.6rem;">
-        <span class="dot t2" onclick="slideTestimonial(2,0)"></span>
-        <span class="dot t2" onclick="slideTestimonial(2,1)"></span>
-        <span class="dot t2" onclick="slideTestimonial(2,2)"></span>
+      <div class="carousel-controls t2-controls" style="margin-top:0.6rem;">
+        <span class="dot t2" data-idx="0" onclick="slideTestimonial(2,0)"></span>
+        <span class="dot t2" data-idx="1" onclick="slideTestimonial(2,1)"></span>
+        <span class="dot t2" data-idx="2" onclick="slideTestimonial(2,2)"></span>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  // Carousel with sliding effect!
   function slideTestimonial(tid, idx) {
     var track = document.querySelector('.carousel-track.t'+tid);
     var dots = document.querySelectorAll('.dot.t'+tid);
     if(track) {
+      // Always recalculate width in case images resize!
       var slideWidth = track.querySelector('img').clientWidth;
       track.style.transform = "translateX(" + (-idx * slideWidth) + "px)";
       // highlight dot
@@ -128,23 +128,35 @@
       });
     }
   }
-  // Responsive: update sliding on window resize
-  window.addEventListener('resize', function(){
+  // On load, highlight dot 0 for each
+  window.addEventListener('DOMContentLoaded', function(){
     slideTestimonial(1,0);
     slideTestimonial(2,0);
+    // highlight dot 0 at load
+    var t1dots = document.querySelectorAll('.carousel-controls.t1-controls .dot');
+    if(t1dots[0]) t1dots[0].style.background = "#0984e3";
+    var t2dots = document.querySelectorAll('.carousel-controls.t2-controls .dot');
+    if(t2dots[0]) t2dots[0].style.background = "#0984e3";
   });
-  // Initialize (show first slide)
-  slideTestimonial(1,0);
-  slideTestimonial(2,0);
+  // Responsive: update sliding on window resize
+  window.addEventListener('resize', function(){
+    // maintain selected dot per carousel
+    var t1sel = Array.from(document.querySelectorAll('.carousel-controls.t1-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
+    var t2sel = Array.from(document.querySelectorAll('.carousel-controls.t2-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
+    slideTestimonial(1, t1sel >= 0 ? t1sel : 0);
+    slideTestimonial(2, t2sel >= 0 ? t2sel : 0);
+  });
 </script>
 <style>
   .testimonial-carousel {
     max-width: 340px;
     max-height: 420px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     background: #f9f9fc;
     border-radius: 1rem;
+    padding-bottom: 32px;
+    position: relative;
   }
   .carousel-track {
     display: flex;
@@ -184,6 +196,7 @@
     .testimonial-block { padding: 1.1rem 0.5rem; }
   }
 </style>
+
 
 
 
