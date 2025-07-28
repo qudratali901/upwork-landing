@@ -115,85 +115,94 @@
 </section>
 
 <script>
-  function slideTestimonial(tid, idx) {
-    var track = document.querySelector('.carousel-track.t'+tid);
-    var dots = document.querySelectorAll('.dot.t'+tid);
-    if(track) {
-      var slideWidth = track.querySelector('img').clientWidth;
-      track.style.transform = "translateX(" + (-idx * slideWidth) + "px)";
-      // highlight dot
-      dots.forEach((dot, i) => {
-        dot.style.background = (i===idx) ? '#0984e3':'#ddd';
-      });
-    }
+ function slideTestimonial(tid, idx) {
+  var track = document.querySelector('.carousel-track.t'+tid);
+  var dots = document.querySelectorAll('.dot.t'+tid);
+  if(track) {
+    // Always recalculate width in case images resize!
+    var slideWidth = track.querySelector('img').clientWidth;
+    track.style.transform = "translateX(" + (-idx * slideWidth) + "px)";
+    // highlight dot
+    dots.forEach((dot, i) => {
+      dot.style.background = (i===idx) ? '#0984e3':'#ddd';
+    });
   }
-  // On load, highlight dot 0 for each
-  window.addEventListener('DOMContentLoaded', function(){
-    slideTestimonial(1,0);
-    slideTestimonial(2,0);
-    // highlight dot 0 at load
-    var t1dots = document.querySelectorAll('.carousel-controls.t1-controls .dot');
-    if(t1dots[0]) t1dots[0].style.background = "#0984e3";
-    var t2dots = document.querySelectorAll('.carousel-controls.t2-controls .dot');
-    if(t2dots[0]) t2dots[0].style.background = "#0984e3";
-  });
-  // Responsive: update sliding on window resize
-  window.addEventListener('resize', function(){
-    var t1sel = Array.from(document.querySelectorAll('.carousel-controls.t1-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
-    var t2sel = Array.from(document.querySelectorAll('.carousel-controls.t2-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
-    slideTestimonial(1, t1sel >= 0 ? t1sel : 0);
-    slideTestimonial(2, t2sel >= 0 ? t2sel : 0);
-  });
+}
+// On load, highlight dot 0 for each
+window.addEventListener('DOMContentLoaded', function(){
+  slideTestimonial(1,0);
+  slideTestimonial(2,0);
+  var t1dots = document.querySelectorAll('.carousel-controls.t1-controls .dot');
+  if(t1dots[0]) t1dots[0].style.background = "#0984e3";
+  var t2dots = document.querySelectorAll('.carousel-controls.t2-controls .dot');
+  if(t2dots[0]) t2dots[0].style.background = "#0984e3";
+});
+// Responsive: update sliding on window resize
+window.addEventListener('resize', function(){
+  var t1sel = Array.from(document.querySelectorAll('.carousel-controls.t1-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
+  var t2sel = Array.from(document.querySelectorAll('.carousel-controls.t2-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
+  slideTestimonial(1, t1sel >= 0 ? t1sel : 0);
+  slideTestimonial(2, t2sel >= 0 ? t2sel : 0);
+});
+
 </script>
 <style>
-  .testimonial-carousel {
-    max-width: 340px;
-    max-height: 420px;
-    margin: 0 auto;
-    overflow: visible;
-    background: #f9f9fc;
-    border-radius: 1rem;
-    padding-bottom: 32px;
-    position: relative;
+ .testimonial-carousel {
+  max-width: 340px;
+  width: 100%;
+  max-height: 420px;
+  margin: 0 auto;
+  overflow: hidden;           /* <--- was visible! */
+  background: #f9f9fc;
+  border-radius: 1rem;
+  padding-bottom: 32px;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(.77,0,.18,1);
+  will-change: transform;
+}
+
+.testimonial-img {
+  width: 100%;               /* <--- NEW: always fills carousel */
+  max-width: 340px;
+  max-height: 410px;
+  height: auto;
+  display: block;
+  margin: 0 auto 0.6em auto;
+  border-radius: 1rem;
+  background: #f2f3f7;
+  flex-shrink: 0;
+  object-fit: contain;      /* Shows the whole image with padding if not the right ratio */
+  box-shadow: 0 2px 10px rgba(9,132,227,0.07);
+}
+
+.carousel-controls .dot {
+  display: inline-block;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  background: #ddd;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 2px solid #eafaf1;
+  transition: background 0.16s;
+}
+.carousel-controls .dot:hover { background: #00b894; }
+
+@media (max-width: 600px) {
+  .testimonial-carousel, .testimonial-img {
+    max-width: 97vw !important;
+    width: 97vw !important;     /* Fill mobile screen */
+    min-width: 97vw !important;
+    max-height: 65vw;
   }
   .carousel-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(.77,0,.18,1);
-    will-change: transform;
+    min-width: 0;
   }
-  .testimonial-img {
-    max-width: 340px;
-    max-height: 410px;
-    width: auto;
-    height: auto;
-    display: block;
-    margin: 0 auto 0.6em auto;
-    border-radius: 1rem;
-    background: #f2f3f7;
-    flex-shrink: 0;
-    object-fit: contain;
-    box-shadow: 0 2px 10px rgba(9,132,227,0.07);
-  }
-  .carousel-controls .dot {
-    display: inline-block;
-    width: 13px; height: 13px;
-    border-radius: 50%;
-    background: #ddd;
-    margin: 0 4px;
-    cursor: pointer;
-    border: 2px solid #eafaf1;
-    transition: background 0.16s;
-  }
-  .carousel-controls .dot:hover { background: #00b894; }
-  .testimonial-block { margin-bottom: 2.3rem; overflow: hidden; }
-  @media (max-width: 600px) {
-    .testimonial-carousel, .testimonial-img {
-      max-width: 98vw !important;
-      max-height: 70vw;
-    }
-    .testimonial-block { padding: 1.1rem 0.5rem; }
-  }
-</style>
+}
+
 
 
 
