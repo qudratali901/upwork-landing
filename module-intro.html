@@ -15,6 +15,24 @@
   </style>
 </head>
 <body>
+<script>
+  // Simple password/key protection
+  (function(){
+    var KEY = "Qudri-123";
+    var entered = false;
+    // show prompt until correct
+    while (!entered) {
+      var userKey = prompt("Enter course access key:");
+      if (userKey === KEY) {
+        entered = true;
+      } else if (userKey === null) {
+        document.body.innerHTML = "<div style='text-align:center;margin-top:5em;font-size:1.4em;color:#c00;'>Access denied.</div>";
+        throw new Error("User exited key prompt");
+      }
+    }
+  })();
+</script>
+
 <nav class="lesson-nav">
   <a href="module-intro.html">Intro</a> |
   <a href="module1-upwork-basics.html">Upwork Basics</a> |
