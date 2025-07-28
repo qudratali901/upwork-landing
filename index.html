@@ -77,7 +77,7 @@
 <section class="testimonials" style="background:#eafaf1;padding:3rem 1rem;text-align:center;">
   <h2>What My Guided Fellows Say</h2>
   <!-- Testimonial 1 -->
-  <div class="testimonial-block" style="margin:2rem auto 2.7rem auto;max-width:430px;background:#fff;border-radius:1.5rem;box-shadow:0 2px 14px rgba(9,132,227,0.08);padding:2.3rem 1.2rem;">
+  <div class="testimonial-block" style="margin:2rem auto 2.7rem auto;max-width:430px;background:#fff;border-radius:1.5rem;box-shadow:0 2px 14px rgba(9,132,227,0.08);padding:2.3rem 1.2rem;overflow:hidden;">
     <img src="assets/Talha-Umar.jpg" alt="Student 1" style="width:60px;height:60px;border-radius:50%;object-fit:cover;margin-bottom:1rem;">
     <blockquote style="font-size:1.11em;color:#222;margin:0 auto 0.7em auto;">“This course made Upwork so clear! I got my first client and now earn confidently.”</blockquote>
     <div style="color:#0984e3;font-weight:500;">– Ali, University Student</div>
@@ -95,7 +95,7 @@
     </div>
   </div>
   <!-- Testimonial 2 -->
-  <div class="testimonial-block" style="margin:2rem auto 2.3rem auto;max-width:430px;background:#fff;border-radius:1.5rem;box-shadow:0 2px 14px rgba(9,132,227,0.08);padding:2.3rem 1.2rem;">
+  <div class="testimonial-block" style="margin:2rem auto 2.3rem auto;max-width:430px;background:#fff;border-radius:1.5rem;box-shadow:0 2px 14px rgba(9,132,227,0.08);padding:2.3rem 1.2rem;overflow:hidden;">
     <img src="assets/Talha-Umar.jpg" alt="Student 2" style="width:60px;height:60px;border-radius:50%;object-fit:cover;margin-bottom:1rem;">
     <blockquote style="font-size:1.11em;color:#222;margin:0 auto 0.7em auto;">“Qudrat bhai’s practical examples gave me the confidence to pitch and deliver projects. Highly recommended!”</blockquote>
     <div style="color:#0984e3;font-weight:500;">– Sana, Fresh Graduate</div>
@@ -105,9 +105,7 @@
         <img src="assets/Talha-Umar-screenshot-2.jpg" class="testimonial-img t2" alt="Screenshot 2">
         <img src="assets/Talha-Umar-screenshot-2.jpg" class="testimonial-img t2" alt="Screenshot 3">
       </div>
-     <div class="testimonial-block" style="margin:2rem auto 2.7rem auto;max-width:430px;background:#fff;border-radius:1.5rem;box-shadow:0 2px 14px rgba(9,132,227,0.08);padding:2.3rem 1.2rem; overflow:hidden;">
-
- <div class="carousel-controls t2-controls" style="margin-top:0.6rem;">
+      <div class="carousel-controls t2-controls" style="margin-top:0.6rem;">
         <span class="dot t2" data-idx="0" onclick="slideTestimonial(2,0)"></span>
         <span class="dot t2" data-idx="1" onclick="slideTestimonial(2,1)"></span>
         <span class="dot t2" data-idx="2" onclick="slideTestimonial(2,2)"></span>
@@ -121,7 +119,6 @@
     var track = document.querySelector('.carousel-track.t'+tid);
     var dots = document.querySelectorAll('.dot.t'+tid);
     if(track) {
-      // Always recalculate width in case images resize!
       var slideWidth = track.querySelector('img').clientWidth;
       track.style.transform = "translateX(" + (-idx * slideWidth) + "px)";
       // highlight dot
@@ -142,7 +139,6 @@
   });
   // Responsive: update sliding on window resize
   window.addEventListener('resize', function(){
-    // maintain selected dot per carousel
     var t1sel = Array.from(document.querySelectorAll('.carousel-controls.t1-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
     var t2sel = Array.from(document.querySelectorAll('.carousel-controls.t2-controls .dot')).findIndex(d => d.style.background === "rgb(9, 132, 227)");
     slideTestimonial(1, t1sel >= 0 ? t1sel : 0);
@@ -189,7 +185,7 @@
     transition: background 0.16s;
   }
   .carousel-controls .dot:hover { background: #00b894; }
-  .testimonial-block { margin-bottom: 2.3rem; }
+  .testimonial-block { margin-bottom: 2.3rem; overflow: hidden; }
   @media (max-width: 600px) {
     .testimonial-carousel, .testimonial-img {
       max-width: 98vw !important;
@@ -198,6 +194,7 @@
     .testimonial-block { padding: 1.1rem 0.5rem; }
   }
 </style>
+
 
 
 
