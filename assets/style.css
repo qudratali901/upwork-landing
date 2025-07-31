@@ -145,6 +145,15 @@ footer {
   text-align: center;
   z-index: 1;
 }
+/* Instagram embed rounded corners (matches iframe style) */
+.proof-video .instagram-media {
+  border-radius: 20px !important;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 315px !important;
+  max-width: 100% !important;
+}
+
 .video-wrap.has-video .responsive-video { display: block; }
 .video-wrap.has-video .no-video-text { display: none; }
 
